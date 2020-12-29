@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
-export function Register(props){
+export function Register({handleAuthentication}){
 
     const [inputs, setInputs] = useState({
         user_name: '',
@@ -30,6 +30,7 @@ export function Register(props){
 
             const parseRes = await response.json();
             localStorage.setItem("token", parseRes.token);
+            handleAuthentication(true);
         } catch (error) {
             console.error(error.message);
         }

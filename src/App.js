@@ -1,13 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
   useRouteMatch,
-  useParams
+  useParams,
+  Redirect
 } from 'react-router-dom';
 import {Home} from './Components/Home/Home';
 import {Login} from './Components/Login/Login';
@@ -15,6 +16,13 @@ import {Register} from './Components/Register/Register';
 
 
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleAuthentication = (isAuth) => {
+    setIsAuthenticated(isAuth);
+  };
+
   return (
     <Router>
       <Fragment>
@@ -33,12 +41,11 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route exact path='/login'>
-            <Login />
-          </Route>
-          <Route exact path='/register'>
-            <Register />
-          </Route>
+          <Route exact path='/login' render={props => !isAuthenticated ? <Login {...props} handleAuthentication={handleAuthentication}/> :  <Redirect to="/" />}/>
+          <Route 
+            exact path='/register' 
+            render={props => !isAuthenticated ? <Register {...props} handleAuthentication={handleAuthentication}/>  : <Redirect to="/"/>} 
+          />
         </Switch>
       </Fragment>
     </Router>
