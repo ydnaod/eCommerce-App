@@ -13,6 +13,7 @@ import {
 import {Home} from './Components/Home/Home';
 import {Login} from './Components/Login/Login';
 import {Register} from './Components/Register/Register';
+import {Upload} from './Components/Upload/Upload';
 
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
           <li>
             <Link to='/register'>Register</Link>
           </li>
+          <li>
+            <Link to='/Upload'>Upload</Link>
+          </li>
         </ul>
         <Switch>
           <Route exact path='/'>
@@ -46,6 +50,9 @@ function App() {
             exact path='/register' 
             render={props => !isAuthenticated ? <Register {...props} handleAuthentication={handleAuthentication}/>  : <Redirect to="/"/>} 
           />
+          <Route exact path='/upload'>
+            <Upload />
+          </Route>
         </Switch>
       </Fragment>
     </Router>

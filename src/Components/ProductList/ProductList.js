@@ -18,7 +18,8 @@ export function ProductList(){
                 description: product.description,
                 id: product.id,
                 name: product.name,
-                price: product.price
+                price: product.price,
+                image: product.image
             }));
             console.log(Array.isArray(newList));
             console.log(typeof productList);
